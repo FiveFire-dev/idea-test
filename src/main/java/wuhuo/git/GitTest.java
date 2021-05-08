@@ -5,5 +5,7 @@ public class GitTest {
 
         System.out.println("git-idea-test");
         System.out.println("git-idea-test-04-fix02");
+        System.out.println("git-idea-test-04-fix03");
+        System.out.println("git-idea-test-04-fix04");
     }
 }
