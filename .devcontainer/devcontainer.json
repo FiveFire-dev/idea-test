@@ -1,0 +1,30 @@
+{
+  "name": "Kylin/RHEL 7.4 Simulation",
+  // 使用 CentOS 7 作为基础镜像，它的底层环境与麒麟V10/RHEL7高度一致
+  "image": "mcr.microsoft.com/devcontainers/base:centos-7",
+  
+  // 预装编译和运行 llama.cpp 所需的基础工具
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {}
+  },
+  
+  // 容器启动后自动执行的初始化命令（安装 gcc, make 等编译依赖）
+  "postCreateCommand": "yum update -y && yum install -y devtoolset-7-gcc* git make centos-release-scl && echo 'source /opt/rh/devtoolset-7/enable' >> ~/.bashrc",
+  
+  // 环境变量设置（确保进入终端时自动启用高版本 GCC）
+  "remoteEnv": {
+    "PATH": "/opt/rh/devtoolset-7/root/usr/bin:${containerWorkspaceFolder}/bin:${env:PATH}"
+  },
+  
+  // 映射端口（方便后续通过浏览器访问 llama-server 的 API 界面）
+  "forwardPorts": [8080],
+  
+  // 自定义 VS Code 扩展（可选，推荐安装 C/C++ 插件方便调试）
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cpptools"
+      ]
+    }
+  }
+}
